@@ -564,6 +564,10 @@ export default class RTCPeerConnection extends EventTarget<RTCPeerConnectionEven
         WebRTCModule.peerConnectionRestartIce(this._pcId);
     }
 
+    sendDTMF(tone) {
+        WebRTCModule.peerConnectionSendDTMF(tone, this._pcId);
+    }
+
     _registerEvents(): void {
         addListener(this, 'peerConnectionOnRenegotiationNeeded', (ev: any) => {
             if (ev.pcId !== this._pcId) {

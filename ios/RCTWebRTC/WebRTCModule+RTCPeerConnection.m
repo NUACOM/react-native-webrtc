@@ -563,6 +563,17 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(peerConnectionRemoveTrack
     return @(ret);
 }
 
+RCT_EXPORT_METHOD(peerConnectionSendDTMF:(nonnull NSString *)tone objectID:(nonnull NSNumber *)objectID)
+{
+  RTCPeerConnection *peerConnection = self.peerConnections[objectID];
+  if (!peerConnection) {
+    return;
+  }
+
+   RTCRtpSender *sender = peerConnection.senders[0];
+  [sender.dtmfSender insertDtmf:tone duration:0.1 interToneGap:0.5];
+}
+
 // TODO: move these below to some SerializeUtils file
 
 /**
